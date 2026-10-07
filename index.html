@@ -6,332 +6,307 @@
 <title>Cufely · Facturas electrónicas conciliadas sin digitar</title>
 <meta name="description" content="Cufely recibe las facturas electrónicas del correo de cada empresa, las valida, descarta las repetidas y las cruza con el extracto del banco, incluso con retenciones. Acceso anticipado para contadores y pymes en Colombia.">
 <meta property="og:title" content="Cufely · Facturas electrónicas conciliadas sin digitar">
-<meta property="og:description" content="Para contadores y pymes en Colombia: facturas DIAN recibidas, validadas y conciliadas sin digitar.">
+<meta property="og:description" content="Para contadores y pymes en Colombia: facturas de la DIAN recibidas, validadas y conciliadas sin digitar.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cufely.com/">
-<meta name="theme-color" content="#08111F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2308111F'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='%2334D399' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230F1A17'/%3E%3Cpath d='M10 16.5l4 4L22.5 12' stroke='%2346D3A1' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap">
 <style>
-/* Layout: portada oscura con el producto animado; secciones claras que alternan texto y una pieza de producto. */
+/* Layout: portada en dos columnas (titular / texto) con el producto a todo el ancho debajo; funciones en cuadrícula bento. */
 :root {
-  --night: #08111F;
-  --night-2: #0F1B2E;
-  --night-line: #1D2B42;
-  --paper: #F6F7F9;
-  --paper-2: #EEF1F5;
-  --surface: #FFFFFF;
-  --text: #0C1626;
-  --muted: #5B6779;
-  --line: #E2E7EE;
-  --accent: #0E9F6E;
-  --accent-2: #34D399;
-  --accent-soft: #E3F6EE;
-  --amber: #B26A00;
-  --amber-soft: #FFF2DC;
-  --blue: #2F5BD3;
-  --blue-soft: #E8EEFC;
-  --dim: #8A95A6;
-  --on-night: #E9EEF5;
-  --on-night-muted: #93A1B5;
-  --shadow-lg: 0 2px 4px rgba(8, 17, 31, 0.06), 0 24px 60px -20px rgba(8, 17, 31, 0.35);
-  --shadow-md: 0 1px 2px rgba(8, 17, 31, 0.05), 0 10px 30px -14px rgba(8, 17, 31, 0.22);
-  --f-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --f-body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono: "Geist Mono", ui-monospace, Consolas, monospace;
-  --r: 8px;
-  --r-lg: 14px;
-  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --bg: #FFFFFF;
+  --bg-soft: #F6F8F7;
+  --ink: #0F1A17;
+  --text: #1D2824;
+  --muted: #5F6B67;
+  --faint: #8C9692;
+  --line: #E7EBE9;
+  --accent: #0F7B5F;
+  --accent-bright: #46D3A1;
+  --accent-soft: #E8F4EF;
+  --amber: #9A5A0A;
+  --amber-soft: #FBF1E3;
+  --blue: #2E57C4;
+  --blue-soft: #EDF1FB;
+  --glass: rgba(255, 255, 255, 0.78);
+  --shadow-sm: 0 1px 2px rgba(15, 26, 23, 0.04), 0 2px 8px -2px rgba(15, 26, 23, 0.06);
+  --shadow-lg: 0 1px 2px rgba(15, 26, 23, 0.04), 0 30px 60px -24px rgba(15, 26, 23, 0.22), 0 12px 24px -12px rgba(15, 26, 23, 0.08);
+  --f-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-serif: "Instrument Serif", Georgia, serif;
+  --r-sm: 8px;
+  --r: 12px;
+  --r-lg: 20px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #0B1422; --paper-2: #0F1A2B; --surface: #121F33; --text: #E9EEF5; --muted: #9AA8BC;
-    --line: #22324B; --accent: #34D399; --accent-soft: #10302A; --amber: #F4B860; --amber-soft: #2E2414;
-    --blue: #93ACF7; --blue-soft: #1A2642; --dim: #6F7D92;
-    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.4), 0 30px 70px -24px rgba(0, 0, 0, 0.8);
-    --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 34px -16px rgba(0, 0, 0, 0.7);
+    --bg: #0B100F; --bg-soft: #111816; --ink: #EEF2F0; --text: #DCE3E0; --muted: #9AA5A1; --faint: #6F7A76;
+    --line: #212B28; --accent: #46D3A1; --accent-soft: #12271F; --amber: #F1B566; --amber-soft: #2A2113;
+    --blue: #93AEF5; --blue-soft: #18213A; --glass: rgba(11, 16, 15, 0.78);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 1px 2px rgba(0, 0, 0, 0.5), 0 30px 60px -24px rgba(0, 0, 0, 0.75);
     color-scheme: dark;
   }
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-body { margin: 0; background: var(--paper); color: var(--text); font-family: var(--f-body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-a { color: var(--accent); }
-:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; border-radius: 3px; }
-.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 20px; }
-.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
-.icon { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--f-sans); font-size: 17px; line-height: 1.65; font-weight: 400; -webkit-font-smoothing: antialiased; font-feature-settings: "ss01"; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 24px; }
+.num { font-variant-numeric: tabular-nums; }
+.icon { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.serif { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
 
-/* Reveal: visible by default; only hidden once JS confirms motion is allowed */
-.js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); transition-delay: var(--d, 0s); }
+/* Reveal: content is visible without JS; motion is added only when allowed */
+.js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: var(--d, 0s); }
 .js [data-reveal].in { opacity: 1; transform: none; }
 
 /* ---------- Header ---------- */
-.top { position: fixed; inset: 0 0 auto 0; z-index: 20; transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s; border-bottom: 1px solid transparent; }
-.top .wrap { display: flex; align-items: center; gap: 32px; height: 68px; }
-.top.solid { background: rgba(8, 17, 31, 0.78); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); border-color: var(--night-line); }
-.logo { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 800; font-size: 22px; letter-spacing: -0.03em; color: var(--on-night); text-decoration: none; }
-.logo svg { width: 30px; height: 30px; }
-.nav { display: flex; gap: 28px; margin-left: auto; }
-.nav a { color: var(--on-night-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.2s; }
-.nav a:hover { color: var(--on-night); }
+.top { position: sticky; top: 0; z-index: 20; background: var(--glass); backdrop-filter: blur(16px) saturate(1.5); -webkit-backdrop-filter: blur(16px) saturate(1.5); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+.top.scrolled { border-color: var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 40px; height: 72px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 19px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+.logo svg { width: 28px; height: 28px; }
+.nav { display: flex; gap: 32px; }
+.nav a { color: var(--muted); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.nav a:hover { color: var(--ink); }
+.top .actions { margin-left: auto; }
 
-.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: var(--r); font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid transparent; cursor: pointer; font-family: inherit; transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s, border-color 0.2s, color 0.2s; }
-.btn:hover { transform: translateY(-1px); }
-.btn .icon { width: 18px; height: 18px; transition: transform 0.2s var(--ease); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 10px; font-weight: 500; font-size: 15px; text-decoration: none; border: 1px solid transparent; cursor: pointer; font-family: inherit; transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s var(--ease); white-space: nowrap; }
+.btn .icon { width: 16px; height: 16px; transition: transform 0.25s var(--ease); }
 .btn:hover .icon { transform: translateX(3px); }
-.btn-primary { background: linear-gradient(180deg, #2DD4A0, #10A877); color: #04241A; box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.4), 0 8px 24px -8px rgba(16, 168, 119, 0.6); }
-.btn-primary:hover { box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.7), 0 12px 32px -8px rgba(16, 168, 119, 0.75); }
-.btn-night { background: rgba(255, 255, 255, 0.06); color: var(--on-night); border-color: rgba(255, 255, 255, 0.14); }
-.btn-night:hover { border-color: rgba(255, 255, 255, 0.35); }
-.btn-lg { padding: 15px 24px; font-size: 16px; }
+.btn-dark { background: var(--ink); color: var(--bg); box-shadow: 0 1px 2px rgba(15,26,23,0.2), inset 0 1px 0 rgba(255,255,255,0.08); }
+.btn-dark:hover { background: color-mix(in srgb, var(--ink) 86%, var(--accent)); }
+.btn-light { background: var(--bg); color: var(--ink); border-color: var(--line); box-shadow: var(--shadow-sm); }
+.btn-light:hover { border-color: color-mix(in srgb, var(--line) 50%, var(--ink)); }
+.btn-lg { height: 50px; padding: 0 24px; font-size: 16px; }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; background: var(--night); color: var(--on-night); overflow: hidden; padding-top: 68px; isolation: isolate; }
-.hero::before { content: ""; position: absolute; inset: 0; z-index: -2;
-  background:
-    radial-gradient(600px 380px at 78% 30%, rgba(52, 211, 153, 0.18), transparent 70%),
-    radial-gradient(520px 360px at 12% 85%, rgba(47, 91, 211, 0.22), transparent 70%); }
-.hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
-  background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-  background-size: 56px 56px; mask-image: radial-gradient(ellipse at 60% 40%, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at 60% 40%, #000 30%, transparent 75%); }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.1fr); gap: 60px; align-items: center; padding-block: 72px 96px; }
-.hero-copy { display: flex; flex-direction: column; gap: 26px; }
-.badge { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; padding: 6px 14px 6px 8px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); border-radius: 999px; font-size: 13px; font-weight: 500; color: var(--on-night); }
-.badge b { font-weight: 600; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(52, 211, 153, 0.16); color: var(--accent-2); }
-h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(40px, 5.8vw, 68px); line-height: 0.98; letter-spacing: -0.04em; margin: 0; text-wrap: balance; font-variation-settings: "opsz" 96; }
-h1 .hl { background: linear-gradient(100deg, #6EE7B7, #34D399 40%, #7DA2FF); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.lead { font-size: clamp(17px, 1.8vw, 20px); color: var(--on-night-muted); margin: 0; max-width: 52ch; }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.std { display: flex; flex-wrap: wrap; gap: 8px 18px; font-family: var(--f-mono); font-size: 13px; color: var(--on-night-muted); }
-.std span { display: inline-flex; align-items: center; gap: 6px; }
-.std span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); opacity: 0.8; }
+.hero { position: relative; padding-block: 72px 0; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 56px; align-items: end; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 6px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); font-size: 14px; color: var(--muted); margin-bottom: 28px; box-shadow: var(--shadow-sm); }
+.eyebrow b { font-weight: 500; font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+h1 { font-weight: 500; font-size: clamp(42px, 5.6vw, 72px); line-height: 1.02; letter-spacing: -0.045em; color: var(--ink); margin: 0; text-wrap: balance; }
+h1 .serif { font-size: 1.08em; color: var(--accent); }
+.hero-side { display: flex; flex-direction: column; gap: 28px; padding-bottom: 8px; }
+.lead { font-size: 19px; line-height: 1.6; color: var(--muted); margin: 0; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.compat { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--faint); margin: 0; }
+.compat .icon { width: 18px; height: 18px; color: var(--accent); }
 
 /* Product window */
-.stage { perspective: 1600px; min-width: 0; }
-.app { background: #FFFFFF; color: #0C1626; border-radius: var(--r-lg); box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 40px 80px -30px rgba(0,0,0,0.75), 0 0 60px -10px rgba(52,211,153,0.18); overflow: hidden; font-size: 13px; transform: rotateY(-7deg) rotateX(4deg); transform-origin: left center; transition: transform 0.8s var(--ease); }
-.stage:hover .app { transform: rotateY(-2deg) rotateX(1deg); }
-.app-bar { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-bottom: 1px solid #E8ECF2; background: #F4F6F9; }
-.dots { display: flex; gap: 6px; }
-.dots span { width: 10px; height: 10px; border-radius: 50%; background: #D7DDE6; }
+.showcase { position: relative; margin-top: 72px; }
+.showcase::before { content: ""; position: absolute; inset: -60px -10% 30% -10%; z-index: -1;
+  background: radial-gradient(50% 60% at 30% 40%, color-mix(in srgb, var(--accent-bright) 22%, transparent), transparent 70%),
+              radial-gradient(45% 55% at 75% 30%, color-mix(in srgb, var(--blue) 14%, transparent), transparent 70%);
+  filter: blur(20px); }
+.app { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg) var(--r-lg) 0 0; border-bottom: 0; box-shadow: var(--shadow-lg); overflow: hidden; font-size: 14px; }
+.app-bar { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--bg-soft); }
+.dots { display: flex; gap: 7px; }
+.dots span { width: 11px; height: 11px; border-radius: 50%; background: var(--line); }
 .app-url { flex: 1; display: flex; justify-content: center; }
-.app-url span { font-family: var(--f-mono); font-size: 12px; color: #7B8798; background: #FFFFFF; border: 1px solid #E3E8EF; border-radius: 6px; padding: 3px 14px; }
-.app-body { display: grid; grid-template-columns: 168px minmax(0, 1fr); min-height: 360px; }
-.app-side { border-right: 1px solid #E8ECF2; padding: 14px 10px; display: flex; flex-direction: column; gap: 3px; background: #FAFBFC; }
-.app-side small { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A95A6; padding: 4px 8px 8px; font-weight: 600; }
-.app-side span { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 6px; color: #5B6779; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.app-side span i { width: 6px; height: 6px; border-radius: 2px; background: #C9D1DC; flex: none; }
-.app-side span.on { background: #FFFFFF; color: #0C1626; font-weight: 600; box-shadow: 0 0 0 1px #E3E8EF, 0 2px 6px -2px rgba(8,17,31,0.12); }
-.app-side span.on i { background: #0E9F6E; }
-.app-main { padding: 16px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-.app-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.app-title strong { font-size: 15px; font-weight: 600; }
-.live { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #0E9F6E; font-weight: 600; }
-.live i { width: 7px; height: 7px; border-radius: 50%; background: #0E9F6E; animation: pulse 1.8s infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(14,159,110,0.5); } 80%, 100% { box-shadow: 0 0 0 7px rgba(14,159,110,0); } }
-.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.kpi { border: 1px solid #E8ECF2; border-radius: 8px; padding: 9px 10px; display: flex; flex-direction: column; gap: 2px; }
-.kpi b { font-family: var(--f-display); font-size: 22px; line-height: 1.05; font-weight: 700; font-variant-numeric: tabular-nums; }
-.kpi span { color: #6A7689; font-size: 11px; }
-.kpi.ok b { color: #0E9F6E; } .kpi.partial b { color: #B26A00; } .kpi.wait b { color: #2F5BD3; } .kpi.dup b { color: #8A95A6; }
-.rows { display: flex; flex-direction: column; border: 1px solid #E8ECF2; border-radius: 8px; overflow: hidden; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) auto 92px; gap: 12px; align-items: center; padding: 10px 12px; border-bottom: 1px solid #EEF1F5; }
-.row:last-child { border-bottom: 0; }
-.row .who { display: flex; flex-direction: column; min-width: 0; }
-.row .who b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.row .who small { color: #8A95A6; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.row .amt { font-family: var(--f-mono); font-size: 12px; white-space: nowrap; color: #34404F; }
-.row.flash { animation: flash 1.2s var(--ease); }
-@keyframes flash { 0% { background: #EAF8F1; } 100% { background: transparent; } }
+.app-url span { font-size: 13px; color: var(--faint); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 4px 18px; }
+.app-body { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 420px; }
+.app-side { border-right: 1px solid var(--line); padding: 20px 14px; display: flex; flex-direction: column; gap: 2px; }
+.app-side small { font-size: 12px; color: var(--faint); padding: 0 10px 10px; }
+.app-side span { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-side span i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); flex: none; }
+.app-side span.on { background: var(--bg-soft); color: var(--ink); font-weight: 500; }
+.app-side span.on i { background: var(--accent-bright); }
+.app-main { padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.app-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.app-title h3 { margin: 0; font-size: 18px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+.live { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.live i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-bright); animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-bright) 55%, transparent); } 80%, 100% { box-shadow: 0 0 0 8px transparent; } }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kpi { padding: 14px 16px; border-radius: var(--r); background: var(--bg-soft); display: flex; flex-direction: column; gap: 4px; }
+.kpi span { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.kpi span i { width: 8px; height: 8px; border-radius: 50%; }
+.kpi b { font-size: 26px; font-weight: 500; letter-spacing: -0.03em; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi.ok i { background: var(--accent-bright); } .kpi.partial i { background: #E9A23B; } .kpi.wait i { background: #6F8FE8; } .kpi.dup i { background: var(--faint); }
+.list { display: flex; flex-direction: column; }
+.item { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) auto 112px; gap: 16px; align-items: center; padding: 14px 4px; border-top: 1px solid var(--line); transition: background 0.6s; }
+.item.flash { background: color-mix(in srgb, var(--accent-soft) 70%, transparent); }
+.item .who { display: flex; flex-direction: column; min-width: 0; }
+.item .who b { font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item .who small, .item .detail { color: var(--faint); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item .amt { color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.item .status { display: flex; justify-content: flex-end; }
 
-.pill { display: inline-flex; justify-content: center; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
-.pill.ok { background: #E3F6EE; color: #0B8A5F; }
-.pill.partial { background: #FFF2DC; color: #9A5B00; }
-.pill.wait { background: #E8EEFC; color: #2F5BD3; }
-.pill.dup { background: #EEF1F5; color: #7B8798; }
-.pill.proc { background: linear-gradient(90deg, #EEF1F5 0%, #F8FAFC 50%, #EEF1F5 100%); background-size: 200% 100%; color: #7B8798; animation: shimmer 1.2s linear infinite; }
-@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
-
-/* ---------- Ticker ---------- */
-.ticker { background: var(--night-2); border-top: 1px solid var(--night-line); border-bottom: 1px solid var(--night-line); overflow: hidden; }
-.ticker-track { display: flex; gap: 48px; width: max-content; padding-block: 18px; animation: marquee 38s linear infinite; }
-.ticker:hover .ticker-track { animation-play-state: paused; }
-.ticker-track span { font-family: var(--f-mono); font-size: 14px; color: var(--on-night-muted); white-space: nowrap; display: inline-flex; align-items: center; gap: 48px; }
-.ticker-track span::after { content: "◆"; font-size: 8px; color: var(--accent-2); opacity: 0.7; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+.tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.tag.ok { background: var(--accent-soft); color: var(--accent); }
+.tag.partial { background: var(--amber-soft); color: var(--amber); }
+.tag.wait { background: var(--blue-soft); color: var(--blue); }
+.tag.dup { background: var(--bg-soft); color: var(--faint); }
+.tag.proc { background: var(--bg-soft); color: var(--faint); }
+.tag.proc::before { animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0.2; } }
 
 /* ---------- Sections ---------- */
-section.block { padding-block: 104px; }
-section.tint { background: var(--paper-2); }
-.head { display: flex; flex-direction: column; gap: 14px; max-width: 700px; margin-bottom: 52px; }
-.head.center { margin-inline: auto; text-align: center; align-items: center; }
-.kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 13px; font-weight: 500; color: var(--accent); margin: 0; }
-.kicker::before { content: ""; width: 18px; height: 1px; background: currentColor; }
-h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(30px, 4.2vw, 48px); letter-spacing: -0.035em; line-height: 1.04; margin: 0; text-wrap: balance; font-variation-settings: "opsz" 72; }
-.sub { color: var(--muted); margin: 0; font-size: 18px; max-width: 60ch; }
+.section { padding-block: 120px; }
+.section.soft { background: var(--bg-soft); }
+.band { border-top: 1px solid var(--line); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: end; margin-bottom: 64px; }
+.head.single { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.label { font-size: 14px; font-weight: 500; color: var(--accent); margin: 0 0 16px; }
+h2 { font-weight: 500; font-size: clamp(32px, 3.8vw, 48px); line-height: 1.08; letter-spacing: -0.035em; color: var(--ink); margin: 0; text-wrap: balance; }
+h2 .serif { color: var(--accent); font-size: 1.06em; }
+.head p.desc { margin: 0; color: var(--muted); font-size: 18px; max-width: 52ch; }
 
 /* Before / after */
-.compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
-.side { border-radius: var(--r-lg); padding: 30px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
-.side.before { background: var(--surface); border: 1px solid var(--line); }
-.side.after { background: var(--night); color: var(--on-night); box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
-.side.after::before { content: ""; position: absolute; inset: -40% -20% auto auto; width: 320px; height: 320px; background: radial-gradient(circle, rgba(52,211,153,0.22), transparent 65%); }
-.side h3 { margin: 0; font-family: var(--f-display); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; position: relative; }
-.side ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; position: relative; }
-.side li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; }
-.side.before li { color: var(--muted); }
-.mark { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; flex: none; margin-top: 1px; }
-.mark svg { width: 12px; height: 12px; stroke-width: 3; }
-.before .mark { background: var(--paper-2); color: var(--dim); }
-.after .mark { background: rgba(52,211,153,0.18); color: var(--accent-2); }
+.compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--bg); }
+.col { padding: 36px 40px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.col + .col { border-left: 1px solid var(--line); background: linear-gradient(180deg, color-mix(in srgb, var(--accent-soft) 60%, var(--bg)), var(--bg)); }
+.col h3 { margin: 0 0 16px; font-size: 15px; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.col + .col h3 { color: var(--accent); }
+.col ul { list-style: none; margin: 0; padding: 0; }
+.col li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-top: 1px solid var(--line); font-size: 16px; }
+.col li:first-child { border-top: 0; }
+.col li .icon { width: 18px; height: 18px; margin-top: 4px; }
+.col:first-child li { color: var(--muted); }
+.col:first-child li .icon { color: var(--faint); }
+.col + .col li { color: var(--ink); }
+.col + .col li .icon { color: var(--accent); }
 
-/* Pipeline */
-.pipeline { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-.rail { position: absolute; top: 31px; left: 12%; right: 12%; height: 2px; background: var(--line); overflow: hidden; border-radius: 2px; }
-.rail::after { content: ""; position: absolute; top: 0; left: -30%; width: 30%; height: 100%; background: linear-gradient(90deg, transparent, var(--accent-2), transparent); animation: travel 3.2s var(--ease) infinite; }
-@keyframes travel { to { left: 100%; } }
-.node { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; min-width: 0; }
-.node .ring { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-md); color: var(--accent); transition: transform 0.3s var(--ease); }
-.node:hover .ring { transform: translateY(-4px) rotate(-3deg); }
-.node .ring .icon { width: 26px; height: 26px; }
-.node small { font-family: var(--f-mono); font-size: 12px; color: var(--dim); }
-.node h3 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
-.node p { margin: 0; color: var(--muted); font-size: 15px; max-width: 26ch; }
-.node code { font-family: var(--f-mono); font-size: 0.85em; color: var(--text); }
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; counter-reset: s; position: relative; }
+.steps::before { content: ""; position: absolute; top: 20px; left: 20px; right: 20px; height: 1px; background: var(--line); }
+.steps li { counter-increment: s; position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.steps li::before { content: counter(s); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 500; font-size: 15px; margin-bottom: 14px; position: relative; box-shadow: var(--shadow-sm); }
+.steps h3 { margin: 0; font-size: 18px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+.steps p { margin: 0; color: var(--muted); font-size: 15px; }
 
-/* Feature rows */
-.feature { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 64px; align-items: center; }
-.feature.flip { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
-.feature.flip .feature-copy { order: 2; }
-.feature-copy { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
-.points { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
-.points li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; }
-.points .ico { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
-.points b { display: block; font-weight: 600; }
-.points span { color: var(--muted); font-size: 15px; }
+/* Bento */
+.bento { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.tile { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px; display: flex; flex-direction: column; gap: 24px; min-width: 0; transition: box-shadow 0.35s var(--ease), transform 0.35s var(--ease); }
+.tile:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.tile.wide { grid-column: span 2; }
+.tile h3 { margin: 0 0 8px; font-size: 20px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+.tile p { margin: 0; color: var(--muted); font-size: 15px; max-width: 46ch; }
+.tile .demo { margin-top: auto; }
+.note { font-size: 12px; color: var(--faint); }
 
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-lg); overflow: hidden; min-width: 0; }
-.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px 20px; border-bottom: 1px solid var(--line); }
-.panel-head strong { font-size: 15px; font-weight: 600; }
-.panel-head span { color: var(--dim); font-size: 12px; font-family: var(--f-mono); }
-.table-scroll { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
-th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; padding: 11px 20px; border-bottom: 1px solid var(--line); background: var(--paper); }
-td { padding: 15px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
-tr:last-child td { border-bottom: 0; }
-td.num, th.num { text-align: right; white-space: nowrap; }
-td .who { display: flex; flex-direction: column; gap: 2px; font-weight: 500; }
-td .who small { color: var(--dim); font-family: var(--f-mono); font-size: 12px; font-weight: 400; }
-td .note { display: block; color: var(--muted); font-size: 12px; margin-top: 6px; }
-tr.muted td { color: var(--dim); }
-section .pill.ok { background: var(--accent-soft); color: var(--accent); }
-section .pill.partial { background: var(--amber-soft); color: var(--amber); }
-section .pill.wait { background: var(--blue-soft); color: var(--blue); }
-section .pill.dup { background: var(--paper-2); color: var(--dim); }
-.math { display: flex; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--paper); color: var(--muted); font-size: 13px; }
-.math .icon { color: var(--accent); width: 18px; height: 18px; margin-top: 1px; }
+.mini { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.mini-row { display: grid; grid-template-columns: minmax(0, 1.4fr) auto auto; gap: 16px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--line); font-size: 14px; }
+.mini-row:first-child { border-top: 0; }
+.mini-row .who b { display: block; font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-row .who small { color: var(--faint); font-size: 12px; }
+.mini-row .amt { font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; text-align: right; }
+.mini-row .amt small { display: block; color: var(--faint); font-size: 12px; }
+.mini-foot { padding: 12px 16px; background: var(--bg-soft); font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
 
-/* RADIAN */
-.radian { padding: 22px; display: flex; flex-direction: column; gap: 18px; }
-.radian-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
-.radian-top b { font-size: 16px; }
-.radian-top span { font-family: var(--f-mono); font-size: 12px; color: var(--dim); }
-.track { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.track li { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding-bottom: 18px; position: relative; }
-.track li:not(:last-child)::before { content: ""; position: absolute; left: 12px; top: 26px; bottom: 2px; width: 2px; background: var(--line); }
-.track li.done:not(:last-child)::before { background: var(--accent); }
-.dot { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--paper-2); color: var(--dim); border: 2px solid var(--line); }
-.track li.done .dot { background: var(--accent); border-color: var(--accent); color: #fff; }
-.track li.next .dot { border-color: var(--amber); color: var(--amber); background: var(--amber-soft); }
-.dot svg { width: 12px; height: 12px; stroke-width: 3; }
-.track b { font-weight: 600; font-size: 15px; display: block; }
-.track small { color: var(--muted); font-size: 13px; }
-.track time { font-family: var(--f-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
-.countdown { border-radius: 10px; background: var(--amber-soft); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
-.countdown-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--amber); font-weight: 600; flex-wrap: wrap; }
-.bar { height: 6px; border-radius: 6px; background: color-mix(in srgb, var(--amber) 20%, transparent); overflow: hidden; }
-.bar i { display: block; height: 100%; width: 66%; border-radius: 6px; background: var(--amber); transform-origin: left; }
-.js .bar i { transform: scaleX(0); transition: transform 1.4s var(--ease) 0.3s; }
-.js .in .bar i, .js .bar.in i { transform: scaleX(1); }
+.dedupe { display: flex; flex-direction: column; gap: 10px; }
+.mail { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); font-size: 13px; color: var(--muted); background: var(--bg); }
+.mail .icon { width: 16px; height: 16px; color: var(--faint); }
+.mail.ghost { opacity: 0.55; text-decoration: line-through; text-decoration-color: var(--faint); }
+.merged { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: 14px; font-weight: 500; }
 
-/* Assistant */
-.chat { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
-.msg { max-width: 88%; padding: 12px 16px; border-radius: 14px; font-size: 15px; }
-.msg.q { align-self: flex-end; background: var(--night); color: var(--on-night); border-bottom-right-radius: 4px; }
-.msg.a { align-self: flex-start; background: var(--paper-2); border-bottom-left-radius: 4px; display: flex; flex-direction: column; gap: 10px; }
-.msg.a strong { font-family: var(--f-mono); font-weight: 500; }
+.track { list-style: none; margin: 0; padding: 0; }
+.track li { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 0; font-size: 14px; position: relative; }
+.track li:not(:last-child)::after { content: ""; position: absolute; left: 8px; top: 26px; height: 16px; width: 1px; background: var(--line); }
+.track .d { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--bg); display: grid; place-items: center; }
+.track .done .d { background: var(--accent); border-color: var(--accent); }
+.track .done .d::after { content: ""; width: 6px; height: 3px; border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff; transform: rotate(-45deg) translate(1px, -1px); }
+.track .next .d { border-color: var(--amber); }
+.track .next .d::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+.track span { color: var(--text); }
+.track small { color: var(--faint); font-size: 12px; margin-left: 6px; }
+.track time { color: var(--faint); font-size: 13px; font-variant-numeric: tabular-nums; }
+.due { margin-top: 14px; padding: 14px 16px; border-radius: var(--r); background: var(--amber-soft); display: flex; flex-direction: column; gap: 10px; }
+.due-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--amber); }
+.due-row b { font-weight: 500; }
+.bar { height: 4px; border-radius: 4px; background: color-mix(in srgb, var(--amber) 18%, transparent); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 66%; border-radius: 4px; background: var(--amber); transform-origin: left; }
+.js .bar i { transform: scaleX(0); transition: transform 1.6s var(--ease) 0.4s; }
+.js .in .bar i { transform: scaleX(1); }
+
+.chat { display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 86%; padding: 12px 16px; border-radius: 16px; font-size: 15px; line-height: 1.55; }
+.msg.q { align-self: flex-end; background: var(--ink); color: var(--bg); border-bottom-right-radius: 6px; }
+.msg.a { align-self: flex-start; background: var(--bg-soft); color: var(--text); border-bottom-left-radius: 6px; display: flex; flex-direction: column; gap: 10px; min-height: 46px; justify-content: center; }
+.msg.a b { font-weight: 600; color: var(--ink); }
 .sources { display: flex; flex-wrap: wrap; gap: 6px; }
-.sources span { font-family: var(--f-mono); font-size: 12px; padding: 4px 8px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
-.sources .icon { width: 13px; height: 13px; color: var(--accent); }
-.typing { display: inline-flex; gap: 4px; }
-.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--dim); animation: blink 1.2s infinite; }
+.sources span { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+.typing { display: inline-flex; gap: 5px; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); animation: blink 1.1s infinite; }
 .typing i:nth-child(2) { animation-delay: 0.15s; } .typing i:nth-child(3) { animation-delay: 0.3s; }
-@keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
 
 /* Security */
-.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: flex; flex-direction: column; gap: 12px; min-width: 0; transition: transform 0.3s var(--ease), box-shadow 0.3s; }
-.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.card .ico { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: var(--night); color: var(--accent-2); }
-.card .ico .icon { width: 22px; height: 22px; }
-.card h3 { margin: 6px 0 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
-.card p { margin: 0; color: var(--muted); font-size: 15px; }
+.trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+.trust div { display: flex; flex-direction: column; gap: 10px; padding-top: 24px; border-top: 1px solid var(--line); }
+.trust .icon { width: 22px; height: 22px; color: var(--accent); margin-bottom: 6px; }
+.trust h3 { margin: 0; font-size: 18px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+.trust p { margin: 0; color: var(--muted); font-size: 15px; }
 
 /* FAQ */
-.faq { display: flex; flex-direction: column; gap: 12px; max-width: 820px; margin-inline: auto; }
-.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); transition: box-shadow 0.2s, border-color 0.2s; }
-.faq details[open] { box-shadow: var(--shadow-md); border-color: transparent; }
-.faq summary { cursor: pointer; list-style: none; padding: 20px 24px; font-weight: 600; font-size: 17px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 64px; align-items: start; }
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 22px 0; font-size: 17px; font-weight: 500; color: var(--ink); display: flex; justify-content: space-between; gap: 24px; align-items: center; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: ""; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform 0.25s var(--ease); flex: none; margin-top: -4px; }
-.faq details[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
-.faq details p { margin: 0; padding: 0 24px 22px; color: var(--muted); max-width: 70ch; }
+.faq summary::after { content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-soft) center / 10px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 1v8M1 5h8' stroke='%235F6B67' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E"); transition: transform 0.3s var(--ease); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0; padding: 0 40px 24px 0; color: var(--muted); }
 
 /* CTA */
-.cta { position: relative; background: var(--night); color: var(--on-night); padding-block: 110px; overflow: hidden; isolation: isolate; }
-.cta::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(700px 400px at 50% 120%, rgba(52, 211, 153, 0.25), transparent 70%); }
-.cta .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
-.cta h2 { max-width: 16ch; }
-.cta p { color: var(--on-night-muted); margin: 0; font-size: 18px; max-width: 54ch; }
-.mailbox { display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 20px; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); flex-wrap: wrap; justify-content: center; }
-.mailbox .addr { font-family: var(--f-mono); font-size: 17px; color: var(--on-night); }
+.cta-card { position: relative; border-radius: 28px; padding: 88px 40px; text-align: center; overflow: hidden; background: var(--ink); color: var(--bg); isolation: isolate; }
+.cta-card::before { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(60% 80% at 50% 120%, color-mix(in srgb, var(--accent-bright) 35%, transparent), transparent 70%),
+              radial-gradient(40% 50% at 10% 0%, color-mix(in srgb, var(--blue) 25%, transparent), transparent 70%); }
+.cta-card h2 { color: var(--bg); max-width: 18ch; margin: 0 auto; }
+.cta-card h2 .serif { color: var(--accent-bright); }
+.cta-card p { color: color-mix(in srgb, var(--bg) 70%, var(--ink)); margin: 20px auto 36px; max-width: 50ch; font-size: 18px; }
+.mailbox { display: inline-flex; align-items: center; gap: 8px; padding: 6px 6px 6px 22px; border-radius: 14px; background: color-mix(in srgb, var(--bg) 8%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 18%, transparent); flex-wrap: wrap; justify-content: center; max-width: 100%; }
+.mailbox .addr { font-size: 17px; color: var(--bg); margin-right: 8px; }
+.cta-card .btn-light { background: var(--bg); color: var(--ink); border-color: transparent; }
+.cta-card .btn-ghost { background: transparent; color: var(--bg); border-color: color-mix(in srgb, var(--bg) 25%, transparent); }
+.cta-card .btn-ghost:hover { border-color: color-mix(in srgb, var(--bg) 60%, transparent); }
 
-footer { background: var(--night); color: var(--on-night-muted); border-top: 1px solid var(--night-line); padding-block: 28px; font-size: 14px; }
+footer { padding-block: 40px 48px; font-size: 14px; color: var(--faint); }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
-footer a { color: var(--on-night); }
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--ink); }
 
-@media (max-width: 1000px) {
-  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 56px; padding-block: 56px 72px; }
-  .app { transform: none; }
-  .feature, .feature.flip { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-  .feature.flip .feature-copy { order: 0; }
-  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
-  .rail { display: none; }
-  .grid-3, .compare { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 1020px) {
+  .hero-grid, .head, .faq-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .hero-grid { align-items: start; }
+  .bento { grid-template-columns: minmax(0, 1fr); }
+  .tile.wide { grid-column: auto; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .steps::before { display: none; }
   .nav { display: none; }
-  .top .btn { margin-left: auto; }
-}
-@media (max-width: 600px) {
-  body { font-size: 16px; }
-  section.block { padding-block: 72px; }
-  .cta { padding-block: 80px; }
-  .pipeline { grid-template-columns: minmax(0, 1fr); }
   .app-body { grid-template-columns: minmax(0, 1fr); }
   .app-side { display: none; }
+}
+@media (max-width: 680px) {
+  body { font-size: 16px; }
+  .wrap { padding-inline: 18px; }
+  .hero { padding-top: 48px; }
+  .section { padding-block: 80px; }
+  .compare, .trust { grid-template-columns: minmax(0, 1fr); }
+  .col + .col { border-left: 0; border-top: 1px solid var(--line); }
+  .col { padding: 28px 24px; }
+  .trust { gap: 32px; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .row { grid-template-columns: minmax(0, 1fr) 86px; }
-  .row .amt { display: none; }
-  .top .btn { padding: 9px 14px; font-size: 14px; }
-  .side { padding: 24px; }
+  .app-main { padding: 18px; }
+  .item { grid-template-columns: minmax(0, 1fr) auto; }
+  .item .detail, .item .amt { display: none; }
+  .tile { padding: 24px; }
+  .cta-card { padding: 64px 22px; border-radius: 22px; }
+  .top .actions .btn { height: 40px; padding: 0 14px; font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .app { transform: none; }
 }
 </style>
 </head>
@@ -340,35 +315,39 @@ footer a { color: var(--on-night); }
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="#" aria-label="Cufely, inicio">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#13233B"/><rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="none" stroke="#2A3D5C"/><path d="M9 16.5l4.5 4.5L23 11" stroke="#34D399" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="8.5" fill="#0F1A17" stroke="#2A3531"/><path d="M10 16.5l4 4L22.5 12" stroke="#46D3A1" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Cufely
     </a>
     <nav class="nav" aria-label="Secciones">
       <a href="#como-funciona">Cómo funciona</a>
-      <a href="#conciliacion">Conciliación</a>
-      <a href="#plazos">Plazos DIAN</a>
+      <a href="#producto">Producto</a>
+      <a href="#seguridad">Seguridad</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
-    <a class="btn btn-primary" href="#contacto">Solicitar acceso</a>
+    <div class="actions"><a class="btn btn-dark" href="#contacto">Solicitar acceso</a></div>
   </div>
 </header>
 
 <main>
-  <div class="hero">
+  <section class="hero">
     <div class="wrap">
-      <div class="hero-copy">
-        <span class="badge" data-reveal><b>Acceso anticipado</b>Para contadores y pymes en Colombia</span>
-        <h1 data-reveal style="--d:0.08s">Las facturas de tus clientes, <span class="hl">conciliadas</span> sin digitar.</h1>
-        <p class="lead" data-reveal style="--d:0.16s">Cufely recibe las facturas electrónicas del correo de cada empresa, las valida, descarta las repetidas y las cruza con el extracto del banco, incluso cuando el pago llega con retenciones.</p>
-        <div class="actions" data-reveal style="--d:0.24s">
-          <a class="btn btn-primary btn-lg" href="#contacto">Solicitar acceso <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn-night btn-lg" href="#como-funciona">Ver cómo funciona</a>
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow" data-reveal><b>Acceso anticipado</b>Para contadores y pymes en Colombia</span>
+          <h1 data-reveal style="--d:.06s">Las facturas de tus clientes, conciliadas <span class="serif">sin digitar.</span></h1>
         </div>
-        <div class="std" data-reveal style="--d:0.32s"><span>UBL 2.1</span><span>CUFE</span><span>Eventos RADIAN</span><span>Retenciones</span></div>
+        <div class="hero-side" data-reveal style="--d:.14s">
+          <p class="lead">Cufely recibe las facturas electrónicas del correo de cada empresa, las valida, descarta las repetidas y las cruza con el extracto del banco, incluso cuando el pago llega con retenciones.</p>
+          <div class="cta-row">
+            <a class="btn btn-dark btn-lg" href="#contacto">Solicitar acceso <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-light btn-lg" href="#como-funciona">Cómo funciona</a>
+          </div>
+          <p class="compat"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Compatible con la factura electrónica de la DIAN (UBL 2.1)</p>
+        </div>
       </div>
 
-      <div class="stage" data-reveal style="--d:0.2s">
-        <div class="app" role="img" aria-label="Vista de Cufely: bandeja de facturas de octubre con su estado de conciliación (datos de ejemplo)">
+      <div class="showcase" data-reveal style="--d:.22s">
+        <div class="app" role="img" aria-label="Vista de Cufely con datos de ejemplo: facturas de octubre y su estado de conciliación">
           <div class="app-bar">
             <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
             <div class="app-url"><span>app.cufely.com</span></div>
@@ -383,197 +362,188 @@ footer a { color: var(--on-night); }
               <span><i></i>Droguería Central</span>
             </div>
             <div class="app-main">
-              <div class="app-title"><strong>Octubre · Facturas recibidas</strong><span class="live"><i></i>Sincronizado</span></div>
+              <div class="app-title"><h3>Facturas de octubre</h3><span class="live"><i></i>Sincronizado con el correo</span></div>
               <div class="kpis">
-                <div class="kpi ok"><b data-count="38">38</b><span>Conciliadas</span></div>
-                <div class="kpi partial"><b data-count="4">4</b><span>Pago parcial</span></div>
-                <div class="kpi wait"><b data-count="6">6</b><span>Sin pago</span></div>
-                <div class="kpi dup"><b data-count="9">9</b><span>Duplicadas</span></div>
+                <div class="kpi ok"><span><i></i>Conciliadas</span><b data-count="38">38</b></div>
+                <div class="kpi partial"><span><i></i>Pago parcial</span><b data-count="4">4</b></div>
+                <div class="kpi wait"><span><i></i>Sin pago</span><b data-count="6">6</b></div>
+                <div class="kpi dup"><span><i></i>Duplicadas</span><b data-count="9">9</b></div>
               </div>
-              <div class="rows">
-                <div class="row"><div class="who"><b>Harinas del Valle S.A.S.</b><small>FE-1042 · Ret. fuente 2,5%</small></div><span class="amt">$1.190.000</span><span class="pill ok" data-state="ok" data-label="Conciliada">Conciliada</span></div>
-                <div class="row"><div class="who"><b>Lácteos La Sabana S.A.S.</b><small>LS-8817 · Saldo $295.000</small></div><span class="amt">$595.000</span><span class="pill partial" data-state="partial" data-label="Parcial">Parcial</span></div>
-                <div class="row"><div class="who"><b>Empaques Andinos Ltda.</b><small>EA-0391 · Aceptación tácita: 13 oct</small></div><span class="amt">$2.380.000</span><span class="pill wait" data-state="wait" data-label="Sin pago">Sin pago</span></div>
-                <div class="row"><div class="who"><b>Harinas del Valle S.A.S.</b><small>FE-1042 · Mismo CUFE, otro correo</small></div><span class="amt">$1.190.000</span><span class="pill dup" data-state="dup" data-label="Duplicada">Duplicada</span></div>
+              <div class="list">
+                <div class="item"><div class="who"><b>Harinas del Valle S.A.S.</b><small>FE-1042</small></div><span class="detail">Retención en la fuente 2,5%</span><span class="amt">$1.190.000</span><span class="status"><span class="tag ok" data-state="ok" data-label="Conciliada">Conciliada</span></span></div>
+                <div class="item"><div class="who"><b>Lácteos La Sabana S.A.S.</b><small>LS-8817</small></div><span class="detail">Saldo pendiente $295.000</span><span class="amt">$595.000</span><span class="status"><span class="tag partial" data-state="partial" data-label="Parcial">Parcial</span></span></div>
+                <div class="item"><div class="who"><b>Empaques Andinos Ltda.</b><small>EA-0391</small></div><span class="detail">Aceptación tácita el 13 oct</span><span class="amt">$2.380.000</span><span class="status"><span class="tag wait" data-state="wait" data-label="Sin pago">Sin pago</span></span></div>
+                <div class="item"><div class="who"><b>Harinas del Valle S.A.S.</b><small>FE-1042</small></div><span class="detail">Mismo CUFE, otro correo</span><span class="amt">$1.190.000</span><span class="status"><span class="tag dup" data-state="dup" data-label="Duplicada">Duplicada</span></span></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>UBL 2.1</span><span>CUFE</span><span>AttachedDocument</span><span>Notas crédito</span><span>Notas débito</span><span>Evento 030 · Acuse de recibo</span><span>Evento 032 · Recibo del bien</span><span>Aceptación tácita</span><span>ReteFuente</span><span>ReteIVA</span><span>ReteICA</span><span>IVA 19%</span>
-      <span>UBL 2.1</span><span>CUFE</span><span>AttachedDocument</span><span>Notas crédito</span><span>Notas débito</span><span>Evento 030 · Acuse de recibo</span><span>Evento 032 · Recibo del bien</span><span>Aceptación tácita</span><span>ReteFuente</span><span>ReteIVA</span><span>ReteICA</span><span>IVA 19%</span>
-    </div>
-  </div>
-
-  <section class="block" aria-labelledby="antes">
+  <section class="section band" aria-labelledby="antes-t">
     <div class="wrap">
       <div class="head" data-reveal>
-        <p class="kicker">Antes y después</p>
-        <h2 id="antes">El trabajo repetitivo alrededor de cada factura, resuelto</h2>
-        <p class="sub">Un contador que atiende varias empresas recibe decenas de facturas por correo cada semana. Esto es lo que cambia.</p>
+        <div>
+          <p class="label">Antes y después</p>
+          <h2 id="antes-t">Menos horas en tareas que no deberían ser <span class="serif">manuales.</span></h2>
+        </div>
+        <p class="desc">Un contador que atiende varias empresas recibe decenas de facturas por correo cada semana. Esto es lo que cambia.</p>
       </div>
-      <div class="compare">
-        <div class="side before" data-reveal>
+      <div class="compare" data-reveal>
+        <div class="col">
           <h3>Hoy, a mano</h3>
           <ul>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Descargar el ZIP de cada correo, empresa por empresa</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Digitar NIT, fecha, subtotal e IVA en una hoja de cálculo</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Buscar a ojo las facturas que llegaron dos veces</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Cuadrar el banco cuando el pago trae retenciones</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Llevar de memoria los plazos RADIAN</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>Descargar el ZIP de cada correo, empresa por empresa</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>Digitar NIT, fecha, subtotal e IVA en una hoja de cálculo</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>Buscar a ojo las facturas que llegaron dos veces</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>Cuadrar el banco cuando el pago trae retenciones</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>Llevar de memoria los plazos de la DIAN</li>
           </ul>
         </div>
-        <div class="side after" data-reveal style="--d:0.12s">
+        <div class="col">
           <h3>Con Cufely</h3>
           <ul>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span>Las facturas llegan solas desde el correo de cada empresa</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span>Los datos se leen del XML, no se digitan</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span>Cada CUFE se registra una sola vez, sin importar cuántas veces llegue</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span>Los pagos se cruzan con retenciones y pagos parciales</li>
-            <li><span class="mark"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span>Los plazos se cuentan en días hábiles, con aviso antes de vencer</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Las facturas llegan solas desde el correo de cada empresa</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Los datos se leen del XML, sin digitar</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cada CUFE se registra una sola vez</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Los pagos se cruzan con retenciones y pagos parciales</li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Los plazos se cuentan en días hábiles, con aviso a tiempo</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="block tint" id="como-funciona" aria-labelledby="como">
+  <section class="section soft" id="como-funciona" aria-labelledby="como-t">
     <div class="wrap">
-      <div class="head center" data-reveal>
-        <p class="kicker">Cómo funciona</p>
-        <h2 id="como">Del correo al extracto bancario</h2>
-        <p class="sub">Cada factura sigue el mismo camino. Lo que no se puede procesar se aparta con su motivo, sin detener lo demás.</p>
-      </div>
-      <div class="pipeline">
-        <div class="rail" aria-hidden="true"></div>
-        <div class="node" data-reveal><div class="ring"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><small>01</small><h3>Recibe</h3><p>Lee el buzón de cada empresa y conserva el XML original tal como llegó.</p></div>
-        <div class="node" data-reveal style="--d:0.1s"><div class="ring"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/></svg></div><small>02</small><h3>Valida</h3><p>Abre el <code>AttachedDocument</code>, extrae la factura y revisa su estructura.</p></div>
-        <div class="node" data-reveal style="--d:0.2s"><div class="ring"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="3"/></svg></div><small>03</small><h3>Registra una vez</h3><p>Identifica cada factura por su CUFE: aunque llegue tres veces, queda una.</p></div>
-        <div class="node" data-reveal style="--d:0.3s"><div class="ring"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8M19 10v8M9 10v8M15 10v8M3 20h18"/></svg></div><small>04</small><h3>Concilia</h3><p>Cruza los pagos del extracto con las facturas, con retenciones y parciales.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="conciliacion" aria-labelledby="concilia-t">
-    <div class="wrap feature">
-      <div class="feature-copy" data-reveal>
-        <p class="kicker">Conciliación</p>
-        <h2 id="concilia-t">Solo revisas lo que de verdad necesita revisión</h2>
-        <p class="sub">Lo que cuadra se concilia solo. Lo demás queda señalado con su motivo.</p>
-        <ul class="points">
-          <li><span class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></span><div><b>Retenciones reconocidas</b><span>ReteFuente, ReteIVA y ReteICA no aparecen como deuda.</span></div></li>
-          <li><span class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v9h9"/></svg></span><div><b>Pagos parciales</b><span>El saldo pendiente de cada factura queda a la vista.</span></div></li>
-          <li><span class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M4 12h10M4 18h10M18 6v12M15 15l3 3 3-3"/></svg></span><div><b>Una transferencia, varias facturas</b><span>Un solo pago puede saldar varias facturas del mismo proveedor.</span></div></li>
-        </ul>
-      </div>
-      <div class="panel" data-reveal style="--d:0.12s">
-        <div class="panel-head"><strong>Panadería La Espiga · Octubre</strong><span>datos de ejemplo</span></div>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th>Proveedor</th><th class="num">Factura</th><th class="num">Pagado</th><th>Estado</th></tr></thead>
-            <tbody>
-              <tr><td><div class="who">Harinas del Valle S.A.S.<small>FE-1042 · NIT 900.123.456-7</small></div></td><td class="num mono">$1.190.000</td><td class="num mono">$1.165.000</td><td><span class="pill ok">Conciliada</span><span class="note">Ret. fuente 2,5%: $25.000</span></td></tr>
-              <tr><td><div class="who">Lácteos La Sabana S.A.S.<small>LS-8817 · NIT 901.456.789-2</small></div></td><td class="num mono">$595.000</td><td class="num mono">$300.000</td><td><span class="pill partial">Pago parcial</span><span class="note">Saldo: $295.000</span></td></tr>
-              <tr><td><div class="who">Empaques Andinos Ltda.<small>EA-0391 · NIT 830.987.654-1</small></div></td><td class="num mono">$2.380.000</td><td class="num mono">—</td><td><span class="pill wait">Sin pago</span><span class="note">Aceptación tácita: 13 oct</span></td></tr>
-              <tr class="muted"><td><div class="who">Harinas del Valle S.A.S.<small>FE-1042 · mismo CUFE</small></div></td><td class="num mono">$1.190.000</td><td class="num mono">—</td><td><span class="pill dup">Duplicada</span><span class="note">Llegó en otro correo</span></td></tr>
-            </tbody>
-          </table>
+      <div class="head" data-reveal>
+        <div>
+          <p class="label">Cómo funciona</p>
+          <h2 id="como-t">Del correo al extracto bancario, en <span class="serif">cuatro pasos.</span></h2>
         </div>
-        <div class="math"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>$1.000.000 + IVA 19% = $1.190.000. Retención 2,5% sobre la base: $25.000. Pagado: $1.165.000.</span></div>
+        <p class="desc">Cada factura sigue el mismo camino. Lo que no se puede procesar se aparta con su motivo, sin detener lo demás.</p>
       </div>
+      <ol class="steps">
+        <li data-reveal><h3>Recibe</h3><p>Lee el buzón de cada empresa y conserva el XML original tal como llegó.</p></li>
+        <li data-reveal style="--d:.08s"><h3>Valida</h3><p>Abre el documento adjunto, extrae la factura y revisa su estructura.</p></li>
+        <li data-reveal style="--d:.16s"><h3>Registra una vez</h3><p>Identifica cada factura por su CUFE: aunque llegue tres veces, queda una.</p></li>
+        <li data-reveal style="--d:.24s"><h3>Concilia</h3><p>Cruza los pagos del extracto con cada factura, con retenciones y parciales.</p></li>
+      </ol>
     </div>
   </section>
 
-  <section class="block tint" id="plazos" aria-labelledby="plazos-t">
-    <div class="wrap feature flip">
-      <div class="feature-copy" data-reveal>
-        <p class="kicker">Plazos DIAN</p>
-        <h2 id="plazos-t">Los eventos RADIAN, contados en días hábiles</h2>
-        <p class="sub">Cufely sigue cada factura desde el acuse de recibo hasta la aceptación, cuenta los días hábiles con los festivos de Colombia y te avisa antes de que venza un plazo.</p>
+  <section class="section" id="producto" aria-labelledby="producto-t">
+    <div class="wrap">
+      <div class="head single" data-reveal>
+        <p class="label">Producto</p>
+        <h2 id="producto-t">Todo lo que pasa después de que llega la <span class="serif">factura.</span></h2>
       </div>
-      <div class="panel" data-reveal style="--d:0.12s">
-        <div class="radian">
-          <div class="radian-top"><b>EA-0391 · Empaques Andinos Ltda.</b><span>datos de ejemplo</span></div>
-          <ol class="track">
-            <li class="done"><span class="dot"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Factura recibida</b><small>Leída del correo y validada</small></div><time>5 oct</time></li>
-            <li class="done"><span class="dot"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Acuse de recibo</b><small>Evento 030</small></div><time>5 oct</time></li>
-            <li class="done"><span class="dot"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></svg></span><div><b>Recibo del bien o servicio</b><small>Evento 032</small></div><time>7 oct</time></li>
-            <li class="next"><span class="dot"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span><div><b>Aceptación tácita</b><small>3 días hábiles después del evento 032</small></div><time>13 oct</time></li>
-          </ol>
-          <div class="countdown">
-            <div class="countdown-row"><span>Vence el martes 13 de octubre</span><span>El 12 es festivo</span></div>
-            <div class="bar" data-reveal><i></i></div>
+      <div class="bento">
+        <article class="tile wide" data-reveal>
+          <div>
+            <h3>Conciliación que entiende las retenciones</h3>
+            <p>ReteFuente, ReteIVA y ReteICA no aparecen como deuda. Los pagos parciales muestran su saldo y una sola transferencia puede saldar varias facturas.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="pregunta-t">
-    <div class="wrap feature">
-      <div class="feature-copy" data-reveal>
-        <p class="kicker">Asistente</p>
-        <h2 id="pregunta-t">Pregunta en español, con la respuesta respaldada</h2>
-        <p class="sub">Consulta tus facturas en lenguaje natural. Cada respuesta muestra de qué facturas sale el número, para que puedas verificarlo.</p>
-      </div>
-      <div class="panel" data-reveal style="--d:0.12s">
-        <div class="panel-head"><strong>Asistente · Panadería La Espiga</strong><span>conversación de ejemplo</span></div>
-        <div class="chat" id="chat">
-          <div class="msg q">¿Cuánto le hemos comprado a Harinas del Valle este año?</div>
-          <div class="msg a" id="answer">
-            <span>Este año le has comprado <strong>$14.280.000</strong> a Harinas del Valle S.A.S. en 12 facturas. El mes con más compras fue agosto, con <strong>$2.380.000</strong>.</span>
-            <div class="sources"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>12 facturas</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>consulta verificable</span></div>
+          <div class="demo mini">
+            <div class="mini-row"><div class="who"><b>Harinas del Valle S.A.S.</b><small>FE-1042</small></div><span class="amt">$1.190.000<small>factura</small></span><span class="tag ok">Conciliada</span></div>
+            <div class="mini-row"><div class="who"><b>Lácteos La Sabana S.A.S.</b><small>LS-8817</small></div><span class="amt">$300.000<small>de $595.000</small></span><span class="tag partial">Parcial</span></div>
+            <div class="mini-foot">$1.000.000 + IVA 19% = $1.190.000 · Retención 2,5%: $25.000 · Pagado: $1.165.000</div>
           </div>
+        </article>
+
+        <article class="tile" data-reveal style="--d:.08s">
+          <div>
+            <h3>Sin duplicados</h3>
+            <p>La misma factura puede llegar en varios correos. Se registra una sola vez.</p>
+          </div>
+          <div class="demo dedupe">
+            <div class="mail"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Factura FE-1042 · lunes</div>
+            <div class="mail ghost"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>RV: Factura FE-1042 · martes</div>
+            <div class="merged"><span>1 factura registrada</span><span>mismo CUFE</span></div>
+          </div>
+        </article>
+
+        <article class="tile" data-reveal>
+          <div>
+            <h3>Plazos de la DIAN, a tiempo</h3>
+            <p>Los eventos RADIAN se cuentan en días hábiles, con los festivos de Colombia.</p>
+          </div>
+          <div class="demo">
+            <ol class="track">
+              <li class="done"><span class="d"></span><span>Acuse de recibo<small>030</small></span><time>5 oct</time></li>
+              <li class="done"><span class="d"></span><span>Recibo del bien<small>032</small></span><time>7 oct</time></li>
+              <li class="next"><span class="d"></span><span>Aceptación tácita</span><time>13 oct</time></li>
+            </ol>
+            <div class="due">
+              <div class="due-row"><b>Vence el martes 13</b><span>el lunes 12 es festivo</span></div>
+              <div class="bar"><i></i></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tile wide" data-reveal style="--d:.08s">
+          <div>
+            <h3>Pregunta en español, con la respuesta respaldada</h3>
+            <p>Consulta tus facturas en lenguaje natural. Cada respuesta muestra de qué facturas sale el número, para verificarlo.</p>
+          </div>
+          <div class="demo chat" id="chat">
+            <div class="msg q">¿Cuánto le hemos comprado a Harinas del Valle este año?</div>
+            <div class="msg a" id="answer">
+              <span>Este año le has comprado <b>$14.280.000</b> en 12 facturas. El mes con más compras fue agosto, con <b>$2.380.000</b>.</span>
+              <div class="sources"><span>12 facturas</span><span>Enero a octubre de 2026</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="note" style="margin-top:20px">Las vistas del producto usan datos de ejemplo.</p>
+    </div>
+  </section>
+
+  <section class="section soft" id="seguridad" aria-labelledby="seg-t">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <div>
+          <p class="label">Seguridad</p>
+          <h2 id="seg-t">Diseñado para cuidar <span class="serif">la información.</span></h2>
         </div>
+        <p class="desc">Son documentos legales y datos financieros de varias empresas. Estas reglas son parte del producto desde el primer día.</p>
+      </div>
+      <div class="trust">
+        <div data-reveal><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><h3>Cada empresa, aislada</h3><p>Un contador ve las empresas que atiende; el dueño de una empresa ve solo la suya.</p></div>
+        <div data-reveal style="--d:.08s"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg><h3>Originales conservados</h3><p>El XML se guarda tal como llegó, como exige la norma, y nunca se borra.</p></div>
+        <div data-reveal style="--d:.16s"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h3>Contenido de terceros, tratado como dato</h3><p>Lo que viene dentro de una factura nunca se interpreta como una instrucción.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="block tint" aria-labelledby="datos">
-    <div class="wrap">
-      <div class="head center" data-reveal>
-        <p class="kicker">Seguridad</p>
-        <h2 id="datos">Diseñado para cuidar la información</h2>
-        <p class="sub">Son documentos legales y datos financieros de varias empresas. Estas reglas son parte del producto, no un agregado.</p>
+  <section class="section" id="preguntas" aria-labelledby="faq-t">
+    <div class="wrap faq-grid">
+      <div data-reveal>
+        <p class="label">Preguntas frecuentes</p>
+        <h2 id="faq-t">Lo que suelen <span class="serif">preguntar.</span></h2>
       </div>
-      <div class="grid-3">
-        <div class="card" data-reveal><div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>Cada empresa, aislada</h3><p>Un contador ve las empresas que atiende; el dueño de una empresa ve solo la suya.</p></div>
-        <div class="card" data-reveal style="--d:0.1s"><div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg></div><h3>Originales conservados</h3><p>El XML se guarda tal como llegó, como exige la norma, y nunca se borra.</p></div>
-        <div class="card" data-reveal style="--d:0.2s"><div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Terceros, tratados como dato</h3><p>Lo que viene dentro de una factura nunca se interpreta como una instrucción.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="preguntas" aria-labelledby="faq-t">
-    <div class="wrap">
-      <div class="head center" data-reveal>
-        <p class="kicker">Preguntas frecuentes</p>
-        <h2 id="faq-t">Lo que suelen preguntar</h2>
-      </div>
-      <div class="faq" data-reveal>
-        <details><summary>¿Cómo obtengo acceso?</summary><p>Estamos sumando contadores al acceso anticipado de forma gradual. Escríbenos contando cuántas empresas atiendes y cuántas facturas reciben al mes, y te contactamos.</p></details>
+      <div class="faq" data-reveal style="--d:.08s">
+        <details><summary>¿Cómo obtengo acceso?</summary><p>Estamos sumando contadores al acceso anticipado de forma gradual. Escríbenos contando cuántas empresas atiendes y cuántas facturas reciben al mes.</p></details>
         <details><summary>¿Reemplaza mi software contable?</summary><p>No. Cufely se encarga del trabajo previo: recibir, validar y conciliar las facturas, para que la información llegue limpia a tu software contable.</p></details>
-        <details><summary>¿Funciona con cualquier proveedor de facturación?</summary><p>Cufely lee el estándar UBL 2.1 de la DIAN, que es el mismo para todos los proveedores tecnológicos autorizados, incluido el AttachedDocument con el que llegan las facturas por correo.</p></details>
-        <details><summary>¿Cuánto cuesta?</summary><p>Los planes se están definiendo junto con los primeros contadores del acceso anticipado. Escríbenos y te contamos las condiciones.</p></details>
+        <details><summary>¿Funciona con cualquier proveedor de facturación?</summary><p>Cufely lee el estándar UBL 2.1 de la DIAN, el mismo para todos los proveedores tecnológicos autorizados, incluido el documento adjunto con el que llegan las facturas por correo.</p></details>
+        <details><summary>¿Cuánto cuesta?</summary><p>Los planes se están definiendo con los primeros contadores del acceso anticipado. Escríbenos y te contamos las condiciones.</p></details>
         <details><summary>¿Qué pasa con la información de mis clientes?</summary><p>Cada empresa está aislada de las demás, los documentos originales se conservan sin modificar y el acceso se limita a quien atiende cada empresa.</p></details>
       </div>
     </div>
   </section>
 
-  <section class="cta" id="contacto" aria-labelledby="contacto-t">
-    <div class="wrap" data-reveal>
-      <p class="kicker" style="color: var(--accent-2)">Acceso anticipado</p>
-      <h2 id="contacto-t">Deja de digitar facturas</h2>
-      <p>Cuéntanos cuántas empresas atiendes y cuántas facturas reciben al mes. Te escribimos para darte acceso.</p>
-      <div class="mailbox">
-        <span class="addr" id="addr">contacto@cufely.com</span>
-        <button class="btn btn-night" type="button" id="copy">Copiar</button>
-        <a class="btn btn-primary" href="mailto:contacto@cufely.com?subject=Solicitud%20de%20acceso%20a%20Cufely">Escribir <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <section class="section" id="contacto" aria-labelledby="contacto-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-card" data-reveal>
+        <h2 id="contacto-t">Deja de digitar <span class="serif">facturas.</span></h2>
+        <p>Cuéntanos cuántas empresas atiendes y cuántas facturas reciben al mes. Te escribimos para darte acceso.</p>
+        <div class="mailbox">
+          <span class="addr" id="addr">contacto@cufely.com</span>
+          <button class="btn btn-ghost" type="button" id="copy">Copiar</button>
+          <a class="btn btn-light" href="mailto:contacto@cufely.com?subject=Solicitud%20de%20acceso%20a%20Cufely">Escribir <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
       </div>
     </div>
   </section>
@@ -582,75 +552,70 @@ footer a { color: var(--on-night); }
 <footer>
   <div class="wrap">
     <span>© 2026 Cufely · Hecho en Colombia</span>
-    <span><a href="mailto:contacto@cufely.com">contacto@cufely.com</a></span>
+    <a href="mailto:contacto@cufely.com">contacto@cufely.com</a>
   </div>
 </footer>
 
 <script>
 (function () {
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Header turns solid after scrolling past the top of the hero.
   var top = document.getElementById("top");
-  var onScroll = function () { top.classList.toggle("solid", window.scrollY > 24); };
+  var onScroll = function () { top.classList.toggle("scrolled", window.scrollY > 8); };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Copy email.
   document.getElementById("copy").addEventListener("click", function () {
     var btn = this;
-    var text = document.getElementById("addr").textContent;
     if (!navigator.clipboard) return;
-    navigator.clipboard.writeText(text).then(function () {
+    navigator.clipboard.writeText(document.getElementById("addr").textContent).then(function () {
       btn.textContent = "Copiado";
       setTimeout(function () { btn.textContent = "Copiar"; }, 1600);
     }, function () {});
   });
 
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || !("IntersectionObserver" in window)) return;
 
-  // Reveal on scroll (content stays visible without JS).
   document.documentElement.classList.add("js");
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
     });
-  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+  }, { threshold: 0.12, rootMargin: "0px 0px -48px 0px" });
   document.querySelectorAll("[data-reveal]").forEach(function (el) { io.observe(el); });
 
-  // Hero: counters and statuses resolve one by one.
+  // Hero: counters climb and each invoice resolves to its status.
   var counters = document.querySelectorAll("[data-count]");
+  var tags = document.querySelectorAll(".app .tag[data-state]");
   counters.forEach(function (el) { el.textContent = "0"; });
-  var pills = document.querySelectorAll(".app .pill[data-state]");
-  pills.forEach(function (p) { p.className = "pill proc"; p.textContent = "Procesando"; });
-
+  tags.forEach(function (t) { t.className = "tag proc"; t.textContent = "Procesando"; });
   setTimeout(function () {
     var start = performance.now();
-    var dur = 1300;
     (function tick(now) {
-      var t = Math.min(1, (now - start) / dur);
+      var t = Math.min(1, (now - start) / 1400);
       var k = 1 - Math.pow(1 - t, 3);
       counters.forEach(function (el) { el.textContent = Math.round(Number(el.dataset.count) * k); });
       if (t < 1) requestAnimationFrame(tick);
     })(start);
-    pills.forEach(function (p, i) {
+    tags.forEach(function (t, i) {
       setTimeout(function () {
-        p.className = "pill " + p.dataset.state;
-        p.textContent = p.dataset.label;
-        p.closest(".row").classList.add("flash");
-      }, 500 + i * 420);
+        t.className = "tag " + t.dataset.state;
+        t.textContent = t.dataset.label;
+        var row = t.closest(".item");
+        row.classList.add("flash");
+        setTimeout(function () { row.classList.remove("flash"); }, 700);
+      }, 600 + i * 450);
     });
-  }, 700);
+  }, 900);
 
-  // Assistant: show typing, then the answer, when it scrolls into view.
+  // Assistant: typing indicator, then the answer.
   var answer = document.getElementById("answer");
   var original = answer.innerHTML;
   answer.innerHTML = '<span class="typing" aria-label="Escribiendo"><i></i><i></i><i></i></span>';
   var chatIo = new IntersectionObserver(function (entries) {
     if (!entries[0].isIntersecting) return;
     chatIo.disconnect();
-    setTimeout(function () { answer.innerHTML = original; }, 1400);
-  }, { threshold: 0.5 });
+    setTimeout(function () { answer.innerHTML = original; }, 1500);
+  }, { threshold: 0.6 });
   chatIo.observe(document.getElementById("chat"));
 })();
 </script>
