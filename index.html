@@ -5,140 +5,228 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cufely · Facturas electrónicas conciliadas sin digitar</title>
 <meta name="description" content="Cufely lee las facturas electrónicas que llegan al correo de cada empresa, descarta las repetidas y las cruza con el extracto del banco, incluso con retenciones. En desarrollo, hecho en Colombia.">
-<meta property="og:title" content="Cufely">
-<meta property="og:description" content="Facturas electrónicas recibidas, validadas y conciliadas sin digitar. Para contadores y pymes en Colombia.">
+<meta property="og:title" content="Cufely · Facturas electrónicas conciliadas sin digitar">
+<meta property="og:description" content="Para contadores y pymes en Colombia: facturas DIAN recibidas, validadas y conciliadas sin digitar.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cufely.com/">
-<meta name="theme-color" content="#0E1B2B">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1B2B'/%3E%3Cpath d='M9 17l4.5 4.5L23 11' stroke='%2334D399' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B1626">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1626'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='%2334D399' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: una columna de lectura; el ejemplo de conciliación es la pieza central, a ancho completo. */
+/* Layout: portada en dos columnas (mensaje + vista del producto), secciones de ancho fijo con ritmo constante. */
 :root {
-  --bg: #F6F8F7;
+  --bg: #F5F7F8;
+  --bg-alt: #EDF1F3;
   --surface: #FFFFFF;
-  --ink: #0E1B2B;
-  --muted: #536173;
-  --line: #DCE3E0;
-  --accent: #0B7A5C;
-  --accent-soft: #E2F3EC;
-  --warn: #9A5A00;
-  --warn-soft: #FDF1DD;
-  --info: #2B4FB0;
-  --info-soft: #E6ECFA;
-  --dim: #8792A0;
+  --ink: #0B1626;
+  --ink-2: #1E2B3D;
+  --muted: #566476;
+  --line: #DDE3E8;
+  --accent: #0A7C5C;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E1F4EC;
+  --warn: #9A5800;
+  --warn-soft: #FDF0DA;
+  --info: #2C4FB3;
+  --info-soft: #E7EDFB;
+  --dim: #8793A3;
+  --shadow: 0 1px 2px rgba(11, 22, 38, 0.06), 0 12px 32px -12px rgba(11, 22, 38, 0.18);
   --f-display: "Schibsted Grotesk", "Arial Narrow", system-ui, sans-serif;
   --f-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
-  --r: 4px;
+  --r: 6px;
+  --r-lg: 10px;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0B131D; --surface: #121C28; --ink: #E7ECF1; --muted: #9AA7B6; --line: #233142;
-    --accent: #34D399; --accent-soft: #0F2A22; --warn: #F2B35A; --warn-soft: #2A2112;
-    --info: #8FA9F5; --info-soft: #18213A; --dim: #6C7A8A; color-scheme: dark;
+    --bg: #0A111B; --bg-alt: #0E1724; --surface: #121D2B; --ink: #E8EDF2; --ink-2: #C9D3DE;
+    --muted: #9BA8B7; --line: #223042; --accent: #34D399; --accent-ink: #062218; --accent-soft: #0F2B22;
+    --warn: #F2B35A; --warn-soft: #2A2112; --info: #93ABF6; --info-soft: #182239; --dim: #6D7B8C;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -16px rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
   }
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 a { color: var(--accent); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
 .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.icon { width: 22px; height: 22px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Header */
-.top { border-bottom: 1px solid var(--line); background: var(--surface); }
-.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; }
-.logo { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
-.logo svg { width: 28px; height: 28px; flex: none; }
-.status { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); display: inline-block; }
-
-/* Hero */
-.hero { padding-block: 72px 56px; display: grid; gap: 28px; max-width: 820px; }
-.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0; }
-h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(36px, 6vw, 62px); line-height: 1.03; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
-.lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); margin: 0; max-width: 62ch; }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 20px; border-radius: var(--r); font-weight: 600; font-size: 16px; text-decoration: none; border: 1px solid transparent; }
-.btn-primary { background: var(--ink); color: var(--bg); }
-.btn-primary:hover { background: var(--accent); color: #fff; }
-.btn-ghost { border-color: var(--line); color: var(--ink); background: var(--surface); }
+/* ---------- Header ---------- */
+.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+.logo svg { width: 28px; height: 28px; }
+.nav { display: flex; gap: 24px; margin-left: auto; }
+.nav a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; }
+.nav a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 18px; border-radius: var(--r); font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid transparent; cursor: pointer; font-family: inherit; transition: background 0.15s, border-color 0.15s, color 0.15s; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { background: var(--ink); color: var(--bg); }
+.btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
 .btn-ghost:hover { border-color: var(--ink); }
+.btn-lg { padding: 14px 22px; font-size: 16px; }
 
-/* Sections */
-section { padding-block: 56px; border-top: 1px solid var(--line); }
-h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(26px, 3.6vw, 36px); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 12px; text-wrap: balance; }
-.section-lead { color: var(--muted); max-width: 62ch; margin: 0 0 32px; }
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 22px 22px; mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 85%); -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 85%); pointer-events: none; }
+.hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 56px; align-items: center; padding-block: 72px 80px; }
+.hero-copy { display: flex; flex-direction: column; gap: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; padding: 6px 12px 6px 10px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; font-size: 13px; font-weight: 500; color: var(--ink-2); }
+.badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 0 3px var(--warn-soft); }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(38px, 5.4vw, 60px); line-height: 1.02; letter-spacing: -0.035em; margin: 0; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--accent); }
+.lead { font-size: clamp(17px, 1.9vw, 20px); color: var(--muted); margin: 0; max-width: 54ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.made { font-size: 14px; color: var(--muted); margin: 0; display: flex; align-items: center; gap: 8px; }
 
-.pains { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
-.pain { padding: 20px 20px 22px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.pain h3 { font-size: 17px; margin: 0; font-weight: 600; }
-.pain p { margin: 0; color: var(--muted); font-size: 15px; }
-
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; counter-reset: step; }
-.steps li { counter-increment: step; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.steps li::before { content: "0" counter(step); font-family: var(--f-mono); font-size: 13px; color: var(--accent); font-weight: 500; }
-.steps h3 { margin: 0; font-size: 17px; font-weight: 600; }
-.steps p { margin: 0; color: var(--muted); font-size: 15px; }
-
-/* Example ledger */
-.ledger { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-.ledger-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 14px; }
-.ledger-head strong { font-weight: 600; }
-.ledger-head span { color: var(--dim); font-size: 13px; }
-.table-scroll { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 760px; }
-th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; padding: 10px 18px; border-bottom: 1px solid var(--line); }
-td { padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
-tr:last-child td { border-bottom: 0; }
-td.num { text-align: right; white-space: nowrap; }
-th.num { text-align: right; }
-.who { display: flex; flex-direction: column; gap: 2px; }
-.who small { color: var(--dim); font-family: var(--f-mono); font-size: 12px; }
-.note { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; }
-.pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 3px; white-space: nowrap; }
+/* Product mockup */
+.app { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); overflow: hidden; font-size: 13px; min-width: 0; }
+.app-bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--bg-alt); }
+.dots { display: flex; gap: 6px; }
+.dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.app-url { flex: 1; text-align: center; color: var(--dim); font-family: var(--f-mono); font-size: 12px; }
+.app-body { display: grid; grid-template-columns: 170px minmax(0, 1fr); min-height: 330px; }
+.app-side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; background: var(--bg); }
+.app-side small { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); padding: 4px 8px 6px; }
+.app-side span { padding: 7px 8px; border-radius: 4px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-side span.on { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: inset 0 0 0 1px var(--line); }
+.app-main { padding: 16px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.app-title { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.app-title strong { font-size: 15px; }
+.app-title span { color: var(--dim); font-size: 12px; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.kpi { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; }
+.kpi b { font-family: var(--f-display); font-size: 20px; line-height: 1.1; }
+.kpi span { color: var(--muted); font-size: 11px; }
+.kpi.ok b { color: var(--accent); } .kpi.partial b { color: var(--warn); } .kpi.wait b { color: var(--info); } .kpi.dup b { color: var(--dim); }
+.rows { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.row:last-child { border-bottom: 0; }
+.row .who { display: flex; flex-direction: column; min-width: 0; }
+.row .who b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .who small { color: var(--dim); font-size: 11px; }
+.row .amt { font-family: var(--f-mono); font-size: 12px; white-space: nowrap; }
+.pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
 .pill.ok { background: var(--accent-soft); color: var(--accent); }
 .pill.partial { background: var(--warn-soft); color: var(--warn); }
 .pill.wait { background: var(--info-soft); color: var(--info); }
-.pill.dup { background: var(--bg); color: var(--dim); border: 1px solid var(--line); }
+.pill.dup { background: var(--bg-alt); color: var(--dim); }
+.app-note { color: var(--dim); font-size: 11px; text-align: right; margin: 0; }
+
+/* ---------- Standards strip ---------- */
+.standards { border-bottom: 1px solid var(--line); background: var(--surface); }
+.standards .wrap { display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap; padding-block: 22px; }
+.standards p { margin: 0; font-size: 14px; color: var(--muted); font-weight: 500; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--f-mono); font-size: 13px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--ink-2); background: var(--bg); }
+
+/* ---------- Sections ---------- */
+section.block { padding-block: 88px; border-bottom: 1px solid var(--line); }
+section.alt { background: var(--bg-alt); }
+.head { display: flex; flex-direction: column; gap: 12px; max-width: 680px; margin-bottom: 44px; }
+.kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0; }
+h2 { font-family: var(--f-display); font-weight: 800; font-size: clamp(28px, 3.8vw, 42px); letter-spacing: -0.03em; line-height: 1.08; margin: 0; text-wrap: balance; }
+.head p:last-child:not(.kicker) { color: var(--muted); margin: 0; font-size: 18px; }
+
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card .ico { width: 42px; height: 42px; border-radius: 8px; display: grid; place-items: center; background: var(--bg-alt); color: var(--ink); }
+.card h3 { margin: 4px 0 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; counter-reset: step; }
+.steps li { counter-increment: step; position: relative; display: flex; flex-direction: column; gap: 10px; padding-top: 52px; min-width: 0; }
+.steps li::before { content: counter(step); position: absolute; top: 0; left: 0; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--bg); font-family: var(--f-display); font-weight: 700; font-size: 15px; z-index: 1; }
+.steps li::after { content: ""; position: absolute; top: 18px; left: 44px; right: -8px; height: 2px; background: repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px); }
+.steps li:last-child::after { display: none; }
+.steps h3 { margin: 0; font-size: 18px; font-weight: 700; }
+.steps p { margin: 0; color: var(--muted); font-size: 15px; }
+.steps code { font-family: var(--f-mono); font-size: 0.86em; background: var(--surface); border: 1px solid var(--line); padding: 1px 5px; border-radius: 3px; }
+
+/* Ledger */
+.ledger { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); overflow: hidden; }
+.ledger-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.ledger-head strong { font-size: 16px; }
+.ledger-head span { color: var(--dim); font-size: 13px; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 780px; }
+th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; padding: 12px 20px; border-bottom: 1px solid var(--line); background: var(--bg); }
+td { padding: 16px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td .who { display: flex; flex-direction: column; gap: 2px; }
+td .who small { color: var(--dim); font-family: var(--f-mono); font-size: 12px; }
+td .note { display: block; color: var(--muted); font-size: 13px; margin-top: 6px; }
 tr.muted td { color: var(--dim); }
-.caption { font-size: 13px; color: var(--dim); margin: 12px 0 0; }
+.math { margin: 20px 0 0; display: flex; gap: 12px; align-items: flex-start; color: var(--muted); font-size: 15px; max-width: 80ch; }
+.math .icon { color: var(--accent); margin-top: 2px; }
 
 /* Roadmap */
-.roadmap { display: grid; gap: 0; border-top: 2px solid var(--ink); }
-.phase { display: grid; grid-template-columns: 90px minmax(0, 1fr) auto; gap: 20px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.phase { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.phase.current { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.phase-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .phase .ver { font-family: var(--f-mono); font-size: 14px; color: var(--muted); }
-.phase h3 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+.phase h3 { margin: 0; font-size: 18px; font-weight: 700; }
 .phase p { margin: 0; color: var(--muted); font-size: 15px; }
 
-.trust { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
-.trust div { display: flex; flex-direction: column; gap: 6px; }
-.trust h3 { margin: 0; font-size: 17px; font-weight: 600; }
-.trust p { margin: 0; color: var(--muted); font-size: 15px; }
+/* FAQ */
+.faq { display: flex; flex-direction: column; border-top: 1px solid var(--line); max-width: 820px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 20px 0; font-weight: 600; font-size: 17px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--f-mono); font-size: 22px; color: var(--muted); font-weight: 400; line-height: 1; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin: 0 0 20px; color: var(--muted); max-width: 68ch; }
 
-.cta { background: var(--ink); color: var(--bg); border-top: 0; }
+/* CTA */
+.cta { background: var(--ink); color: var(--bg); padding-block: 88px; }
+.cta .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: center; }
 .cta h2 { color: var(--bg); }
-.cta p { color: color-mix(in srgb, var(--bg) 75%, var(--ink)); max-width: 60ch; margin: 0 0 24px; }
-.cta .email { font-family: var(--f-mono); font-size: clamp(18px, 3vw, 24px); color: var(--bg); }
-.cta .btn-primary { background: var(--accent); color: #fff; }
+.cta p { color: color-mix(in srgb, var(--bg) 72%, var(--ink)); margin: 16px 0 0; font-size: 18px; max-width: 52ch; }
+.mailbox { background: color-mix(in srgb, var(--bg) 6%, var(--ink)); border: 1px solid color-mix(in srgb, var(--bg) 18%, var(--ink)); border-radius: var(--r-lg); padding: 24px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.mailbox small { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: color-mix(in srgb, var(--bg) 60%, var(--ink)); }
+.mailbox .addr { font-family: var(--f-mono); font-size: clamp(18px, 2.4vw, 22px); color: var(--bg); word-break: break-all; }
+.mailbox .actions .btn-ghost { background: transparent; color: var(--bg); border-color: color-mix(in srgb, var(--bg) 30%, var(--ink)); }
+.mailbox .actions .btn-ghost:hover { border-color: var(--bg); }
 .cta .btn-primary:hover { background: var(--bg); color: var(--ink); }
 
-footer { padding-block: 28px; font-size: 14px; color: var(--muted); }
-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer { padding-block: 32px; font-size: 14px; color: var(--muted); }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+footer a { color: var(--ink-2); }
 
-@media (max-width: 640px) {
+@media (max-width: 980px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 44px; padding-block: 56px 64px; }
+  .grid-4, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { row-gap: 32px; }
+  .steps li:nth-child(2)::after { display: none; }
+  .timeline, .grid-3 { grid-template-columns: minmax(0, 1fr); }
+  .cta .wrap { grid-template-columns: minmax(0, 1fr); }
+  .nav { display: none; }
+  .top .btn { margin-left: auto; }
+}
+@media (max-width: 600px) {
   body { font-size: 16px; }
-  .hero { padding-block: 48px 40px; }
-  section { padding-block: 44px; }
-  .phase { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .status span { display: none; }
+  section.block, .cta { padding-block: 64px; }
+  .grid-4, .steps { grid-template-columns: minmax(0, 1fr); }
+  .steps li::after { display: none; }
+  .app-body { grid-template-columns: minmax(0, 1fr); }
+  .app-side { display: none; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .row .amt { display: none; }
+  .top .btn { padding: 9px 14px; font-size: 14px; }
 }
 </style>
 </head>
@@ -147,131 +235,229 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#" aria-label="Cufely, inicio">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="currentColor"/><path d="M9 17l4.5 4.5L23 11" stroke="#34D399" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><path d="M9 16.5l4.5 4.5L23 11" stroke="#34D399" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Cufely
     </a>
-    <p class="status"><i aria-hidden="true"></i><span>En desarrollo ·&nbsp;</span>Colombia</p>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#ejemplo">Conciliación</a>
+      <a href="#ruta">Hoja de ruta</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-primary" href="#contacto">Unirme al piloto</a>
   </div>
 </header>
 
 <main>
-  <div class="wrap">
-    <div class="hero">
-      <p class="eyebrow">Para contadores y pymes en Colombia</p>
-      <h1>Las facturas de tus clientes, recibidas y conciliadas sin digitar.</h1>
-      <p class="lead">Cufely lee las facturas electrónicas que llegan al correo de cada empresa, las valida, descarta las repetidas y las cruza con el extracto del banco, incluso cuando el pago llega con retenciones.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:hola@cufely.com?subject=Quiero%20probar%20Cufely">Quiero probarlo</a>
-        <a class="btn btn-ghost" href="#como-funciona">Ver cómo funciona</a>
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="badge"><i aria-hidden="true"></i>En desarrollo · Piloto abierto para contadores</span>
+        <h1>Las facturas de tus clientes, <em>conciliadas</em> sin digitar.</h1>
+        <p class="lead">Cufely lee las facturas electrónicas que llegan al correo de cada empresa, las valida, descarta las repetidas y las cruza con el extracto del banco, incluso cuando el pago llega con retenciones.</p>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#contacto">Quiero probarlo</a>
+          <a class="btn btn-ghost btn-lg" href="#como-funciona">Ver cómo funciona</a>
+        </div>
+        <p class="made">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Hecho en Colombia para la factura electrónica de la DIAN
+        </p>
+      </div>
+
+      <div class="app" role="img" aria-label="Vista de ejemplo de Cufely: bandeja de facturas de octubre con su estado de conciliación">
+        <div class="app-bar">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="app-url">app.cufely.com</div>
+        </div>
+        <div class="app-body">
+          <div class="app-side">
+            <small>Empresas</small>
+            <span class="on">Panadería La Espiga</span>
+            <span>Restaurante El Fogón</span>
+            <span>Pastelería Dulce Hogar</span>
+            <span>Ferretería San José</span>
+          </div>
+          <div class="app-main">
+            <div class="app-title"><strong>Octubre · Facturas recibidas</strong><span>Datos de ejemplo</span></div>
+            <div class="kpis">
+              <div class="kpi ok"><b>38</b><span>Conciliadas</span></div>
+              <div class="kpi partial"><b>4</b><span>Pago parcial</span></div>
+              <div class="kpi wait"><b>6</b><span>Sin pago</span></div>
+              <div class="kpi dup"><b>9</b><span>Duplicadas</span></div>
+            </div>
+            <div class="rows">
+              <div class="row"><div class="who"><b>Harinas del Valle S.A.S.</b><small>FE-1042 · Ret. fuente 2,5%</small></div><span class="amt">$1.190.000</span><span class="pill ok">Conciliada</span></div>
+              <div class="row"><div class="who"><b>Lácteos La Sabana S.A.S.</b><small>LS-8817 · Saldo $295.000</small></div><span class="amt">$595.000</span><span class="pill partial">Parcial</span></div>
+              <div class="row"><div class="who"><b>Empaques Andinos Ltda.</b><small>EA-0391 · Aceptación tácita en 2 días</small></div><span class="amt">$2.380.000</span><span class="pill wait">Sin pago</span></div>
+              <div class="row"><div class="who"><b>Harinas del Valle S.A.S.</b><small>FE-1042 · Mismo CUFE, otro correo</small></div><span class="amt">$1.190.000</span><span class="pill dup">Duplicada</span></div>
+            </div>
+            <p class="app-note">Vista ilustrativa · datos ficticios</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <section aria-labelledby="problema">
+  <div class="standards">
     <div class="wrap">
-      <h2 id="problema">Lo que hoy se hace a mano</h2>
-      <p class="section-lead">Un contador que atiende varias empresas recibe decenas de facturas por correo cada semana. Casi todo el trabajo alrededor de ellas es repetitivo y propenso a errores.</p>
-      <div class="pains">
-        <div class="pain"><h3>Digitar cada factura</h3><p>Abrir el ZIP, leer el PDF y pasar NIT, fecha, subtotal e IVA a una hoja de cálculo.</p></div>
-        <div class="pain"><h3>Facturas repetidas</h3><p>El proveedor reenvía el mismo correo y la factura termina registrada dos veces.</p></div>
-        <div class="pain"><h3>Pagos que no cuadran</h3><p>Retenciones, pagos parciales y una sola transferencia que paga varias facturas.</p></div>
-        <div class="pain"><h3>Plazos ante la DIAN</h3><p>Los eventos RADIAN corren en días hábiles y hoy se controlan de memoria.</p></div>
+      <p>Habla el idioma de la factura electrónica:</p>
+      <div class="chips">
+        <span class="chip">UBL 2.1</span>
+        <span class="chip">CUFE</span>
+        <span class="chip">AttachedDocument</span>
+        <span class="chip">Notas crédito y débito</span>
+        <span class="chip">Eventos RADIAN</span>
+        <span class="chip">Retenciones</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" aria-labelledby="problema">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">El problema</p>
+        <h2 id="problema">Horas de trabajo repetitivo alrededor de cada factura</h2>
+        <p>Un contador que atiende varias empresas recibe decenas de facturas por correo cada semana. Casi todo lo que pasa después se hace a mano.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg></div>
+          <h3>Digitar cada factura</h3><p>Abrir el ZIP, leer el PDF y pasar NIT, fecha, subtotal e IVA a una hoja de cálculo.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></div>
+          <h3>Facturas repetidas</h3><p>El proveedor reenvía el mismo correo y la factura termina registrada dos veces.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h6"/><path d="M17 15l4 4M21 15l-4 4"/></svg></div>
+          <h3>Pagos que no cuadran</h3><p>Retenciones, pagos parciales y una transferencia que paga varias facturas a la vez.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div>
+          <h3>Plazos ante la DIAN</h3><p>Los eventos RADIAN corren en días hábiles y hoy se controlan de memoria.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="como-funciona" aria-labelledby="como">
+  <section class="block alt" id="como-funciona" aria-labelledby="como">
     <div class="wrap">
-      <h2 id="como">Cómo funciona</h2>
-      <p class="section-lead">Cada factura sigue el mismo camino, desde el correo hasta el extracto bancario.</p>
+      <div class="head">
+        <p class="kicker">Cómo funciona</p>
+        <h2 id="como">Del correo al extracto bancario, en cuatro pasos</h2>
+        <p>Cada factura sigue el mismo camino. Lo que no se puede procesar se aparta con su motivo, sin detener lo demás.</p>
+      </div>
       <ol class="steps">
-        <li><h3>Recibe</h3><p>Lee el buzón de cada empresa y guarda el XML original tal como llegó, para conservarlo.</p></li>
-        <li><h3>Valida</h3><p>Abre el AttachedDocument, extrae la factura y revisa su estructura. Lo que llega dañado se aparta con el motivo.</p></li>
-        <li><h3>Registra una sola vez</h3><p>Cada factura queda identificada por su CUFE: aunque llegue tres veces, se registra una.</p></li>
-        <li><h3>Concilia</h3><p>Cruza los pagos del extracto con las facturas, teniendo en cuenta retenciones y pagos parciales.</p></li>
+        <li><h3>Recibe</h3><p>Lee el buzón de cada empresa y guarda el XML original tal como llegó.</p></li>
+        <li><h3>Valida</h3><p>Abre el <code>AttachedDocument</code>, extrae la factura y revisa su estructura.</p></li>
+        <li><h3>Registra una vez</h3><p>Cada factura se identifica por su CUFE: aunque llegue tres veces, se registra una.</p></li>
+        <li><h3>Concilia</h3><p>Cruza los pagos del extracto con las facturas, con retenciones y pagos parciales.</p></li>
       </ol>
     </div>
   </section>
 
-  <section aria-labelledby="ejemplo">
+  <section class="block" id="ejemplo" aria-labelledby="ejemplo-t">
     <div class="wrap">
-      <h2 id="ejemplo">Así se vería la conciliación</h2>
-      <p class="section-lead">El contador ve el estado de cada factura y solo revisa los casos que lo necesitan.</p>
+      <div class="head">
+        <p class="kicker">Conciliación</p>
+        <h2 id="ejemplo-t">Solo revisas lo que de verdad necesita revisión</h2>
+        <p>Cada factura muestra su estado y el motivo. Lo que cuadra se concilia solo; lo demás queda señalado.</p>
+      </div>
       <div class="ledger">
         <div class="ledger-head"><strong>Panadería La Espiga · Octubre</strong><span>Vista de ejemplo con datos ficticios</span></div>
         <div class="table-scroll">
           <table>
-            <thead>
-              <tr><th>Proveedor</th><th>Factura</th><th class="num">Total factura</th><th class="num">Pagado</th><th>Estado</th></tr>
-            </thead>
+            <thead><tr><th>Proveedor</th><th>Factura</th><th class="num">Total factura</th><th class="num">Pagado</th><th>Estado</th></tr></thead>
             <tbody>
-              <tr>
-                <td><div class="who">Harinas del Valle S.A.S.<small>NIT 900.123.456-7</small></div></td>
-                <td class="mono">FE-1042</td>
-                <td class="num mono">$1.190.000</td>
-                <td class="num mono">$1.165.000</td>
-                <td><span class="pill ok">Conciliada</span><span class="note">Retención en la fuente 2,5%: $25.000</span></td>
-              </tr>
-              <tr>
-                <td><div class="who">Lácteos La Sabana S.A.S.<small>NIT 901.456.789-2</small></div></td>
-                <td class="mono">LS-8817</td>
-                <td class="num mono">$595.000</td>
-                <td class="num mono">$300.000</td>
-                <td><span class="pill partial">Pago parcial</span><span class="note">Saldo pendiente: $295.000</span></td>
-              </tr>
-              <tr>
-                <td><div class="who">Empaques Andinos Ltda.<small>NIT 830.987.654-1</small></div></td>
-                <td class="mono">EA-0391</td>
-                <td class="num mono">$2.380.000</td>
-                <td class="num mono">—</td>
-                <td><span class="pill wait">Sin pago</span><span class="note">Aceptación tácita en 2 días hábiles</span></td>
-              </tr>
-              <tr class="muted">
-                <td><div class="who">Harinas del Valle S.A.S.<small>NIT 900.123.456-7</small></div></td>
-                <td class="mono">FE-1042</td>
-                <td class="num mono">$1.190.000</td>
-                <td class="num mono">—</td>
-                <td><span class="pill dup">Duplicada</span><span class="note">Mismo CUFE, llegó en otro correo</span></td>
-              </tr>
+              <tr><td><div class="who">Harinas del Valle S.A.S.<small>NIT 900.123.456-7</small></div></td><td class="mono">FE-1042</td><td class="num mono">$1.190.000</td><td class="num mono">$1.165.000</td><td><span class="pill ok">Conciliada</span><span class="note">Retención en la fuente 2,5%: $25.000</span></td></tr>
+              <tr><td><div class="who">Lácteos La Sabana S.A.S.<small>NIT 901.456.789-2</small></div></td><td class="mono">LS-8817</td><td class="num mono">$595.000</td><td class="num mono">$300.000</td><td><span class="pill partial">Pago parcial</span><span class="note">Saldo pendiente: $295.000</span></td></tr>
+              <tr><td><div class="who">Empaques Andinos Ltda.<small>NIT 830.987.654-1</small></div></td><td class="mono">EA-0391</td><td class="num mono">$2.380.000</td><td class="num mono">—</td><td><span class="pill wait">Sin pago</span><span class="note">Aceptación tácita en 2 días hábiles</span></td></tr>
+              <tr class="muted"><td><div class="who">Harinas del Valle S.A.S.<small>NIT 900.123.456-7</small></div></td><td class="mono">FE-1042</td><td class="num mono">$1.190.000</td><td class="num mono">—</td><td><span class="pill dup">Duplicada</span><span class="note">Mismo CUFE, llegó en otro correo</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
-      <p class="caption">Ejemplo: $1.190.000 = $1.000.000 + IVA 19%. El cliente retuvo el 2,5% de la base ($25.000) y pagó $1.165.000; Cufely reconoce la diferencia como retención y no como deuda.</p>
+      <p class="math"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>$1.190.000 = $1.000.000 + IVA 19%. El cliente retuvo el 2,5% de la base ($25.000) y pagó $1.165.000. Cufely reconoce esa diferencia como retención, no como deuda.</span></p>
     </div>
   </section>
 
-  <section aria-labelledby="ruta">
+  <section class="block alt" aria-labelledby="datos">
     <div class="wrap">
-      <h2 id="ruta">Hoja de ruta</h2>
-      <p class="section-lead">Cufely se construye por etapas. Cada una se entrega probada antes de empezar la siguiente.</p>
-      <div class="roadmap">
-        <div class="phase"><span class="ver">v0</span><div><h3>Ingesta sin duplicados</h3><p>Lectura automática de facturas desde el correo, validación y registro único por CUFE.</p></div><span class="pill partial">En construcción</span></div>
-        <div class="phase"><span class="ver">v1</span><div><h3>Conciliación y plazos DIAN</h3><p>Cruce con extractos bancarios, retenciones y seguimiento de los eventos RADIAN en días hábiles.</p></div><span class="pill dup">Planeado</span></div>
-        <div class="phase"><span class="ver">v2</span><div><h3>Preguntas en lenguaje natural</h3><p>"¿Cuánto le compramos a este proveedor este año?", con la respuesta y los datos que la respaldan.</p></div><span class="pill dup">Planeado</span></div>
+      <div class="head">
+        <p class="kicker">Seguridad</p>
+        <h2 id="datos">Diseñado para cuidar la información</h2>
+        <p>Son documentos legales y datos financieros de varias empresas. Estas reglas son parte del diseño desde el primer día.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <h3>Cada empresa, aislada</h3><p>Un contador ve las empresas que atiende; el dueño de una empresa ve solo la suya.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/></svg></div>
+          <h3>Originales conservados</h3><p>El XML se guarda tal como llegó, como exige la norma, y nunca se borra.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12h6"/></svg></div>
+          <h3>Contenido de terceros, tratado como dato</h3><p>Lo que viene dentro de una factura nunca se interpreta como una instrucción.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section aria-labelledby="datos">
+  <section class="block" id="ruta" aria-labelledby="ruta-t">
     <div class="wrap">
-      <h2 id="datos">Diseñado para cuidar la información</h2>
-      <p class="section-lead">Son documentos legales y datos financieros de varias empresas. Estas reglas son parte del diseño desde el primer día.</p>
-      <div class="trust">
-        <div><h3>Cada empresa, aislada</h3><p>Un contador ve las empresas que atiende; el dueño de una empresa ve solo la suya.</p></div>
-        <div><h3>Originales conservados</h3><p>El XML se guarda tal como llegó, como exige la norma, y nunca se borra.</p></div>
-        <div><h3>Contenido de terceros, tratado como dato</h3><p>Lo que viene dentro de una factura nunca se interpreta como una instrucción.</p></div>
+      <div class="head">
+        <p class="kicker">Hoja de ruta</p>
+        <h2 id="ruta-t">Se construye por etapas, cada una probada</h2>
+        <p>No empezamos la siguiente etapa hasta que la anterior funciona con datos reales.</p>
+      </div>
+      <div class="timeline">
+        <div class="phase current">
+          <div class="phase-top"><span class="ver">Etapa 1</span><span class="pill partial">En construcción</span></div>
+          <h3>Ingesta sin duplicados</h3><p>Lectura automática de facturas desde el correo, validación y registro único por CUFE.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-top"><span class="ver">Etapa 2</span><span class="pill dup">Planeado</span></div>
+          <h3>Conciliación y plazos DIAN</h3><p>Cruce con extractos bancarios, retenciones y seguimiento de eventos RADIAN en días hábiles.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-top"><span class="ver">Etapa 3</span><span class="pill dup">Planeado</span></div>
+          <h3>Preguntas en lenguaje natural</h3><p>"¿Cuánto le compramos a este proveedor este año?", con la respuesta y los datos que la respaldan.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cta" aria-labelledby="contacto">
+  <section class="block alt" id="preguntas" aria-labelledby="faq-t">
     <div class="wrap">
-      <h2 id="contacto">¿Eres contador o tienes una pyme?</h2>
-      <p>Buscamos personas que reciban facturas electrónicas por correo y quieran probar Cufely mientras se construye. Escríbenos y cuéntanos cuántas empresas atiendes.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:hola@cufely.com?subject=Quiero%20probar%20Cufely">Escribir a Cufely</a>
-        <span class="email">hola@cufely.com</span>
+      <div class="head">
+        <p class="kicker">Preguntas frecuentes</p>
+        <h2 id="faq-t">Lo que suelen preguntar</h2>
+      </div>
+      <div class="faq">
+        <details><summary>¿Ya puedo usar Cufely?</summary><p>Todavía no está disponible al público. Estamos construyendo la primera etapa y buscamos contadores que quieran probarla con sus facturas reales y darnos su opinión.</p></details>
+        <details><summary>¿Reemplaza mi software contable?</summary><p>No. Cufely se encarga del trabajo previo: recibir, validar y conciliar las facturas. La idea es que la información llegue limpia a tu software contable, no reemplazarlo.</p></details>
+        <details><summary>¿Cuánto va a costar?</summary><p>Aún no hay precios definidos. Las personas que participen en el piloto nos ayudarán a definir un modelo que tenga sentido para contadores y pymes.</p></details>
+        <details><summary>¿Qué pasa con la información de mis clientes?</summary><p>Cada empresa está aislada de las demás, los documentos originales se conservan sin modificar y el acceso se limita a quien atiende cada empresa.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contacto" aria-labelledby="contacto-t">
+    <div class="wrap">
+      <div>
+        <h2 id="contacto-t">¿Eres contador o tienes una pyme?</h2>
+        <p>Buscamos personas que reciban facturas electrónicas por correo y quieran probar Cufely mientras se construye. Cuéntanos cuántas empresas atiendes y cuántas facturas reciben al mes.</p>
+      </div>
+      <div class="mailbox">
+        <small>Escríbenos</small>
+        <span class="addr" id="addr">contacto@cufely.com</span>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:contacto@cufely.com?subject=Quiero%20probar%20Cufely">Enviar correo</a>
+          <button class="btn btn-ghost" type="button" id="copy">Copiar dirección</button>
+        </div>
       </div>
     </div>
   </section>
@@ -280,9 +466,19 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 <footer>
   <div class="wrap">
     <span>© 2026 Cufely · Hecho en Colombia</span>
-    <span>Construido en público: <a href="https://github.com/MarlonJara-S/conciliador-fiscal">ver el desarrollo en GitHub</a></span>
+    <span>Construido en público · <a href="https://github.com/MarlonJara-S/conciliador-fiscal">ver el desarrollo en GitHub</a></span>
   </div>
 </footer>
 
+<script>
+  document.getElementById("copy").addEventListener("click", function () {
+    var btn = this;
+    var text = document.getElementById("addr").textContent;
+    var done = function () { btn.textContent = "Copiada"; setTimeout(function () { btn.textContent = "Copiar dirección"; }, 1600); };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(done, function () {});
+    }
+  });
+</script>
 </body>
 </html>
